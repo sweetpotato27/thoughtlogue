@@ -1,19 +1,19 @@
 // src/components/profile/profile_container.js
 
 import { connect } from 'react-redux';
-import { fetchUserTweets } from '../../actions/tweet_actions';
+import { fetchUserThoughts } from '../../actions/thought_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state) => {
   return {
-    tweets: Object.values(state.tweets.user),
+    thoughts: Object.values(state.thoughts.user),
     currentUser: state.session.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUserTweets: id => dispatch(fetchUserTweets(id))
+    fetchUserThoughts: id => dispatch(fetchUserThoughts(id))
   };
 };
 

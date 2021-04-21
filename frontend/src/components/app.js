@@ -8,8 +8,8 @@ import MainPage from './main/main_page';
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
 import ProfileContainer from './profile/profile_container';
-import TweetsContainer from './tweets/tweets_container';
-import TweetComposeContainer from './tweets/tweet_compose_container';
+import ThoughtsContainer from './thoughts/thought_container';
+import ThoughtLogContainer from './thoughts/thought_log_container';
 
 const App = () => (
     <div>
@@ -19,9 +19,9 @@ const App = () => (
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
 
-            <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
+            <ProtectedRoute exact path="/thoughts" component={ThoughtsContainer} />
             <ProtectedRoute exact path="/profile" component={ProfileContainer} />
-            <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} />
+            <ProtectedRoute exact path="/new_thought" component={ThoughtLogContainer} />
         </Switch>
     </div>
 );

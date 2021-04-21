@@ -1,31 +1,31 @@
-// src/components/tweets/tweet_compose.js
+// src/components/thoughts/thought_compose.js
 
 import React from 'react';
-import TweetBox from './tweet_box';
+import ThoughtBox from './thought_box';
 
-class TweetCompose extends React.Component {
+class ThoughtLog extends React.Component {
   constructor(props) {
       super(props);
 
       this.state = {
           text: "",
-          newTweet: ""
+          newThought: ""
       }
 
       this.handleSubmit = this.handleSubmit.bind(this);
   } 
 
   componentWillReceiveProps(nextProps) {
-      this.setState({newTweet: nextProps.newTweet.text});
+      this.setState({newThought: nextProps.newThought.text});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let tweet = {
+    let thought = {
       text: this.state.text
     };
 
-    this.props.composeTweet(tweet); 
+    this.props.logThought(thought); 
     this.setState({text: ''})
   }
 
@@ -43,16 +43,16 @@ class TweetCompose extends React.Component {
                     <input type="textarea"
                         value={this.state.text}
                         onChange={this.update()}
-                        placeholder="Write your tweet..."
+                        placeholder="Log your thought..."
                     />
                     <input type="submit" value="Submit" />
                 </div>
             </form>
             <br />
-            <TweetBox text={this.state.newTweet} />
+            <ThoughtBox user={this.props.currentUser} text={this.state.newThought} />
         </div>
     )
   }
 }
 
-export default TweetCompose;
+export default ThoughtLog;

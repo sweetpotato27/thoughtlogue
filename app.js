@@ -8,7 +8,7 @@ const db = require('./config/keys').mongoURI;
 const port = process.env.PORT || 5000;
 
 const users = require("./routes/api/users");
-const tweets = require("./routes/api/tweets");
+const thoughts = require("./routes/api/thoughts");
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,6 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/api/users", users);
-app.use("/api/tweets", tweets);
+app.use("/api/thoughts", thoughts);
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
