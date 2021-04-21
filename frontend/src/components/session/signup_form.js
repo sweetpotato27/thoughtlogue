@@ -15,7 +15,7 @@ class SignupForm extends React.Component {
         this.clearedErrors = false;
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.signedIn === true) {
             this.props.history.push('/login');
         }
@@ -53,31 +53,61 @@ class SignupForm extends React.Component {
     }
     render() {
         return (
-        <div className="login-form-container">
+        <div className="session-form-container">
+                <br/>
             <form onSubmit={this.handleSubmit}>
-            <div className="login-form">
-                <br/>
-                <input type="text"
-                    value={this.state.email}
-                    onChange={this.update('email')}
-                    placeholder="Email"
-                />
-                <br/>
-                <input type="text"
-                    value={this.state.handle}
-                    onChange={this.update('name')}
-                    placeholder="Name"
-                />
-                <br/>
-                <input type="password"
-                    value={this.state.password}
-                    onChange={this.update('password')}
-                    placeholder="Password"
-                />
-                <br/>
-                <input type="submit" value="Submit" />
+                <div>{"{"}</div>
+                <div className="indent">{'signup:'}</div>
+                <div className="session-form-content">
+                    <div>{"{"}</div>
+                    <div className="session-form-input-div indent">
+                      <p className="session-form-input-label">email:</p>
+                      <p className="session-form-input-label">"</p>
+                      <label htmlFor="email" className="visuallyhidden">Email: </label>
+                        <input type="text"
+                            value={this.state.email}
+                            onChange={this.update('email')}
+                            placeholder="Email"
+                            name="email"
+                            className="session-form-input"
+                        />
+                      <p className="session-form-input-label">"</p>
+                    </div>
+                    <br/>
+                    <div className="session-form-input-div indent">
+                      <p className="session-form-input-label">name:</p>
+                      <p className="session-form-input-label">"</p>
+                      <label htmlFor="name" className="visuallyhidden">Name: </label>
+                        <input type="text"
+                            value={this.state.name}
+                            onChange={this.update('name')}
+                            placeholder="Name"
+                            name="name"
+                            className="session-form-input"
+                        />
+                      <p className="session-form-input-label">"</p>
+                    </div>
+                    <br/>
+                    <div className="session-form-input-div indent">
+                      <p className="session-form-input-label">password:</p>
+                      <p className="session-form-input-label">"</p>
+                      <label htmlFor="password" className="visuallyhidden">Password: </label>
+                        <input type="text"
+                            value={this.state.password}
+                            onChange={this.update('password')}
+                            placeholder="Password"
+                            name="password"
+                            className="session-form-input"
+                        />
+                      <p className="session-form-input-label">"</p>
+                    </div>
+                    <br/>
+                    <div>{'}'}</div>
+                </div>
+                <div>{'}'}</div>
+                <label htmlFor="submit" className="visuallyhidden">Submit: </label>
+                <input type="submit" value="Submit" name="submit"/>
                 {this.renderErrors()}
-            </div>
             </form>
         </div>
         );

@@ -21,7 +21,6 @@ the layout will be something like:
 
 .thought-log-input-div {
     display: flex;
-    
 }
 
 .thought-log-input-label {
@@ -36,12 +35,26 @@ the layout will be something like:
     resize: none;
 }
 
+.session-form-content {
+    margin-left: 2em;
+}
+
+.session-form-input-div {
+    display: flex;
+}
+.session-form-input-label {
+    margin-top: 0;
+}
+.session-form-input {
+    margin-top: 0;
+    text-align:left;
+    height: 1em;
+    border: none;
+    outline: none;
+}
+
 /* 
     id selectors 
     ||  ||  ||  ||
     \/  \/  \/  \/
 */
-
-#blinking-cursor {
-    
-}

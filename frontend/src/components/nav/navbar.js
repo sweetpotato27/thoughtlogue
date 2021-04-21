@@ -20,12 +20,14 @@ class NavBar extends React.Component {
                 e.target.style.textDecoration = "none";
             }); 
         }
-        span.addEventListener('mouseover', (e) => {
-            e.target.innerHTML = e.target.innerHTML + "();";
-        });
-        span.addEventListener('mouseout', (e) => {
-            e.target.innerHTML = e.target.innerHTML.split("();")[0];
-        });
+        if (span !== undefined) {
+            span.addEventListener('mouseover', (e) => {
+                e.target.innerHTML = e.target.innerHTML + "();";
+            });
+            span.addEventListener('mouseout', (e) => {
+                e.target.innerHTML = e.target.innerHTML.split("();")[0];
+            });
+        }
     }
 
     logoutUser(e) {

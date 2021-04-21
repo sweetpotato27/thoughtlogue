@@ -4,10 +4,15 @@
 #root {
   width: 100vw;
   height: 100vh;
+  cursor: default;
 }
 #app {
   width: 80%;
   margin: auto;
+}
+
+.visuallyhidden {
+  display: none;
 }
 
 .movement {

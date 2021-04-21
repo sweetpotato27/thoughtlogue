@@ -44,13 +44,14 @@ class ThoughtLog extends React.Component {
         <div>
             <form onSubmit={this.handleSubmit}>
                 <div>
-                  <div>{"{"}</div>
+                  <p>{"{"}</p>
                   <div className="indent">{'thought:'}</div>
                   <div className="new-thought-content">
                     <p>{"{"}</p>
                     <p className="thought-log-name indent">name: "{this.props.currentUser.name}"</p>
                     <div className="thought-log-input-div indent">
                       <p className="thought-log-input-label">text: "</p>
+                      <label htmlFor="text" className="visuallyhidden">Text: </label>
                       <textarea
                           value={this.state.text}
                           onChange={this.update()}
@@ -59,7 +60,8 @@ class ThoughtLog extends React.Component {
                           placeholder="Log your thought..."
                           id="thought-log-textarea"
                           className="thought-log-input"
-                      ><span className="blinking-cursor">|</span></textarea>
+                          name="text"
+                      ></textarea>
                       <p className="thought-log-input-label">"</p>
                     </div>
                     <div>{'}'}</div>
