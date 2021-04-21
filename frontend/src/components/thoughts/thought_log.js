@@ -15,7 +15,11 @@ class ThoughtLog extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this);
   } 
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    document.getElementById("thought-log-textarea").focus();
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
       this.setState({newThought: nextProps.newThought.text});
   }
 
@@ -40,12 +44,29 @@ class ThoughtLog extends React.Component {
         <div>
             <form onSubmit={this.handleSubmit}>
                 <div>
-                    <input type="textarea"
-                        value={this.state.text}
-                        onChange={this.update()}
-                        placeholder="Log your thought..."
-                    />
-                    <input type="submit" value="Submit" />
+                  <div>{"{"}</div>
+                  <div className="indent">{'thought:'}</div>
+                  <div className="new-thought-content">
+                    <p>{"{"}</p>
+                    <p className="thought-log-name indent">name: "{this.props.currentUser.name}"</p>
+                    <div className="thought-log-input-div indent">
+                      <p className="thought-log-input-label">text: "</p>
+                      <textarea
+                          value={this.state.text}
+                          onChange={this.update()}
+                          cols="30"
+                          rows="5"
+                          placeholder="Log your thought..."
+                          id="thought-log-textarea"
+                          className="thought-log-input"
+                      ><span className="blinking-cursor">|</span></textarea>
+                      <p className="thought-log-input-label">"</p>
+                    </div>
+                    <div>{'}'}</div>
+                  </div>
+                  <div>{'}'}</div>
+                  <br />
+                  <input type="submit" value="Submit" />
                 </div>
             </form>
             <br />

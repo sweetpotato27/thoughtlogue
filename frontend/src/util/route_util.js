@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; /* Warning not using Component */
+import React from 'react'; 
 import {connect} from 'react-redux';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 

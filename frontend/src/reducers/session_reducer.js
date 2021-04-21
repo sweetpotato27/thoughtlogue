@@ -9,7 +9,7 @@ const initialState = {
     user: {}
 };
 
-export default (state = initialState, action) => { /* warning with arrow function */
+const SessionReducer = (state = initialState, action) => { 
     switch (action.type) {
         case RECEIVE_CURRENT_USER:
             return {
@@ -31,3 +31,5 @@ export default (state = initialState, action) => { /* warning with arrow functio
             return state;
     }
 }
+
+export default SessionReducer;

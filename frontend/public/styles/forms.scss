@@ -1,0 +1,47 @@
+/*
+my intention is to create the text input field that looks like a JavaScript object.
+the layout will be something like:
+{ "thought": 
+    "~the user types the input here~" }
+*/
+
+/* 
+    class selectors 
+    ||  ||  ||  ||
+    \/  \/  \/  \/
+*/
+
+.indent {
+    margin-left: 1em;
+}
+
+.new-thought-content {
+    margin-left: 2em;
+}
+
+.thought-log-input-div {
+    display: flex;
+    
+}
+
+.thought-log-input-label {
+    margin-top: 0;
+}
+
+.thought-log-input {
+    height: 6em;
+    text-align:left;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+/* 
+    id selectors 
+    ||  ||  ||  ||
+    \/  \/  \/  \/
+*/
+
+#blinking-cursor {
+    
+}
