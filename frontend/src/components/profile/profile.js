@@ -22,11 +22,11 @@ class Profile extends React.Component {
     
     render() {
         if (this.state.thoughts.length === 0) {
-          return (<div>This user has no Thoughts</div>)
+          return (<div>This user has no thoughts</div>)
         } else {
           return (
             <div>
-              <h2>All of This User's Thoughts</h2>
+              <h2>{this.props.currentUser.name}'s thoughts</h2>
               {this.state.thoughts.map(thought => (
                 <ThoughtBox key={thought._id} user={this.props.currentUser} text={thought.text} />
               ))}

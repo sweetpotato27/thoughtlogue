@@ -1,6 +1,15 @@
 @import '../public/styles/forms.scss';
 @import '../public/styles/nav.scss';
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+#app {
+  width: 80%;
+  margin: auto;
+}
+
 .movement {
   transition: font-size 500ms linear 1s;
 }

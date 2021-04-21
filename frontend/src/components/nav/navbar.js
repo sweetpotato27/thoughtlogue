@@ -9,6 +9,25 @@ class NavBar extends React.Component {
         this.getLinks = this.getLinks.bind(this);
     }
 
+    componentDidMount() {
+        const ele = document.getElementsByClassName("navigation-link");
+        const span = document.getElementsByClassName("navigation-span")[0];
+        for (let i = 0; i < ele.length; i++) {
+            ele[i].addEventListener('mouseover', (e) => {
+                e.target.style.textDecoration = "underline";
+            }); 
+            ele[i].addEventListener('mouseout', (e) => {
+                e.target.style.textDecoration = "none";
+            }); 
+        }
+        span.addEventListener('mouseover', (e) => {
+            e.target.innerHTML = e.target.innerHTML + "();";
+        });
+        span.addEventListener('mouseout', (e) => {
+            e.target.innerHTML = e.target.innerHTML.split("();")[0];
+        });
+    }
+
     logoutUser(e) {
         e.preventDefault();
         this.props.logout();
@@ -18,18 +37,18 @@ class NavBar extends React.Component {
     getLinks() {
         if (this.props.loggedIn) {
             return (
-                <div>
-                    <Link to={'/thoughts'}>All Thoughts</Link>
-                    <Link to={'/profile'}>Profile</Link>
-                    <Link to={'/new_thought'}>Write a Thought</Link>
-                    <button onClick={this.logoutUser}>Logout</button>
+                <div className="navigation-div" >
+                    <Link className="navigation-link" to={'/thoughts'}>/thoughts</Link>
+                    <Link className="navigation-link" to={'/profile'}>/profile</Link>
+                    <Link className="navigation-link" to={'/new_thought'}>/new_thought</Link>
+                    <span className="navigation-span" onClick={this.logoutUser}>.logout</span>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <Link to={'/signup'}>Signup</Link>
-                    <Link to={'/login'}>Login</Link>
+                <div className="navigation-div" >
+                    <Link className="navigation-link" to={'/signup'}>/signup</Link>
+                    <Link className="navigation-link" to={'/login'}>/login</Link>
                 </div>
             );
         }

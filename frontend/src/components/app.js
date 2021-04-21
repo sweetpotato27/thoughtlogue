@@ -14,7 +14,7 @@ import ThoughtsContainer from './thoughts/thought_container';
 import ThoughtLogContainer from './thoughts/thought_log_container';
 
 const App = () => (
-    <div>
+    <div id="app">
         {/* <MovementScript /> */}
         <NavBarContainer />
         <Switch>
