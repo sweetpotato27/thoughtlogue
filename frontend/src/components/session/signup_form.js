@@ -13,6 +13,8 @@ class SignupForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.clearedErrors = false;
+        this.handleHoverEnter = this.handleHoverEnter.bind(this);
+        this.handleHoverExit = this.handleHoverExit.bind(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -40,6 +42,17 @@ class SignupForm extends React.Component {
         this.props.signup(user, this.props.history);
     }
 
+    handleHoverEnter(e) {
+        console.log(e.target.innerText);
+        if(!e.target.innerText.includes(";")) {
+            e.target.innerText += ";";
+        }
+    }
+
+    handleHoverExit(e) {
+        e.target.innerText = e.target.innerText.split(";")[0];
+    }
+
     renderErrors() {
         return(
             <ul>
@@ -62,6 +75,7 @@ class SignupForm extends React.Component {
                     <div>{"{"}</div>
                     <div className="session-form-input-div indent">
                       <p className="session-form-input-label">email:</p>
+                      <div className="spacer"></div>
                       <p className="session-form-input-label">"</p>
                       <label htmlFor="email" className="visuallyhidden">Email: </label>
                         <input type="text"
@@ -76,6 +90,7 @@ class SignupForm extends React.Component {
                     <br/>
                     <div className="session-form-input-div indent">
                       <p className="session-form-input-label">name:</p>
+                      <div className="spacer"></div>
                       <p className="session-form-input-label">"</p>
                       <label htmlFor="name" className="visuallyhidden">Name: </label>
                         <input type="text"
@@ -90,6 +105,7 @@ class SignupForm extends React.Component {
                     <br/>
                     <div className="session-form-input-div indent">
                       <p className="session-form-input-label">password:</p>
+                      <div className="spacer"></div>
                       <p className="session-form-input-label">"</p>
                       <label htmlFor="password" className="visuallyhidden">Password: </label>
                         <input type="text"
@@ -106,7 +122,16 @@ class SignupForm extends React.Component {
                 </div>
                 <div>{'}'}</div>
                 <label htmlFor="submit" className="visuallyhidden">Submit: </label>
-                <input type="submit" value="Submit" name="submit"/>
+                <div className="session-submit-div">
+                    <span 
+                        id="session-submit"
+                        onClick={this.handleSubmit}
+                        onMouseEnter={this.handleHoverEnter}
+                        onMouseLeave={this.handleHoverExit}
+                        className="session-submit-span"
+                        >.signup(<span id="session-submit-name"></span>)
+                    </span>
+                </div>
                 {this.renderErrors()}
             </form>
         </div>

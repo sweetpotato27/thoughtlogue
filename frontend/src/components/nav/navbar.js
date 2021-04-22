@@ -7,32 +7,21 @@ class NavBar extends React.Component {
         super(props);
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
-    }
-
-    componentDidMount() {
-        const ele = document.getElementsByClassName("navigation-link");
-        const span = document.getElementsByClassName("navigation-span")[0];
-        for (let i = 0; i < ele.length; i++) {
-            ele[i].addEventListener('mouseover', (e) => {
-                e.target.style.textDecoration = "underline";
-            }); 
-            ele[i].addEventListener('mouseout', (e) => {
-                e.target.style.textDecoration = "none";
-            }); 
-        }
-        if (span !== undefined) {
-            span.addEventListener('mouseover', (e) => {
-                e.target.innerHTML = e.target.innerHTML + "();";
-            });
-            span.addEventListener('mouseout', (e) => {
-                e.target.innerHTML = e.target.innerHTML.split("();")[0];
-            });
-        }
+        this.handleHoverEnter = this.handleHoverEnter.bind(this);
+        this.handleHoverExit = this.handleHoverExit.bind(this);
     }
 
     logoutUser(e) {
         e.preventDefault();
         this.props.logout();
+    }
+
+    handleHoverEnter(e) {
+        e.target.innerHTML = e.target.innerHTML + "();";
+    }
+
+    handleHoverExit(e) {
+        e.target.innerHTML = e.target.innerHTML.split("();")[0];
     }
 
     // Selectively render links dependent on whether the user is logged in 
@@ -43,7 +32,10 @@ class NavBar extends React.Component {
                     <Link className="navigation-link" to={'/thoughts'}>/thoughts</Link>
                     <Link className="navigation-link" to={'/profile'}>/profile</Link>
                     <Link className="navigation-link" to={'/new_thought'}>/new_thought</Link>
-                    <span className="navigation-span" onClick={this.logoutUser}>.logout</span>
+                    <span className="navigation-span" 
+                        onMouseEnter={this.handleHoverEnter}
+                        onMouseLeave={this.handleHoverExit}
+                        onClick={this.logoutUser}>.logout</span>
                 </div>
             );
         } else {
@@ -54,6 +46,7 @@ class NavBar extends React.Component {
                 </div>
             );
         }
+        
     }
 
     render() {

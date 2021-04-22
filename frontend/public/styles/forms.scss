@@ -28,6 +28,7 @@ the layout will be something like:
 }
 
 .thought-log-input {
+    margin-bottom: 0;
     height: 6em;
     text-align:left;
     border: none;
@@ -41,16 +42,28 @@ the layout will be something like:
 
 .session-form-input-div {
     display: flex;
+    height: 1em;
 }
 .session-form-input-label {
     margin-top: 0;
 }
 .session-form-input {
-    margin-top: 0;
-    text-align:left;
+    margin-top: auto;
+    padding: 0;
+    text-align: left;
     height: 1em;
     border: none;
     outline: none;
+}
+
+.session-submit-div {
+    margin: 5px 5px 5px 0px;
+}
+.session-submit-div:hover {
+    cursor: pointer;
+}
+.session-submit-span {
+    
 }
 
 /* 
@@ -58,3 +71,7 @@ the layout will be something like:
     ||  ||  ||  ||
     \/  \/  \/  \/
 */
+
+#session-submit {
+    padding: 10px 20px 10px 0px;
+}
