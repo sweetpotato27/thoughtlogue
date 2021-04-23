@@ -17,10 +17,8 @@ class Thought extends React.Component {
 
   UNSAFE_componentWillMount() {
     let lastFetch = parseInt(window.localStorage.getItem("lastFetch"));
-    if (Math.floor((Date.now() - lastFetch) / 1000) > 10) {
-      console.log("time to fetch");
+    if (Math.floor((Date.now() - lastFetch) / 1000) > 300) {
       this.props.fetchThoughts().then((res) => {
-          console.log("fetching thoughts");
           if (res !== undefined) {
             window.localStorage.setItem("lastFetch", Date.now().toString());
             window.localStorage.setItem("thoughts", JSON.stringify(res.thoughts));
@@ -29,13 +27,10 @@ class Thought extends React.Component {
       });
     } else {
       if (JSON.parse(window.localStorage.getItem("thoughts")) !== null ) {
-        console.log("already got the thoughts");
         let storedThoughts = JSON.parse(window.localStorage.getItem("thoughts")).data;
         this.setState({ thoughts: storedThoughts });
       } else {
         this.props.fetchThoughts().then(res => {
-          console.log("getting thoughts");
-          console.log(res);
           if (res !== undefined) {
             window.localStorage.setItem("lastFetch", Date.now().toString());
             window.localStorage.setItem("thoughts", JSON.stringify(res.thoughts));
@@ -56,10 +51,20 @@ class Thought extends React.Component {
     } else {
       return (
         <div>
-          <h2>All Thoughts</h2>
-          {this.state.thoughts.map(thought => (
-            <ThoughtBox key={thought._id} user={thought.user} text={thought.text} />
-          ))}
+          <p>{"{"}</p>
+          <p className="indent">thoughts:</p>
+          <div className="indent">
+            <p>{"["}</p>
+            {this.state.thoughts.map((thought, idx) => (
+                    <ThoughtBox key={thought._id} 
+                                user={thought.user} 
+                                text={thought.text}
+                                thoughtsLength={this.state.thoughts.length} 
+                                index={idx}/>
+                    ))}
+            <p>{"]"}</p>
+          </div>
+          <p>{"}"}</p>
         </div>
       );
     }

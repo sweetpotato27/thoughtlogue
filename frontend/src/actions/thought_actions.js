@@ -27,11 +27,12 @@ export const fetchThoughts = () => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const fetchUserThoughts = id => dispatch => (
-  getUserThoughts(id)
-    .then(thoughts => dispatch(receiveUserThoughts(thoughts)))
+export const fetchUserThoughts = id => dispatch => {
+  return getUserThoughts(id)
+    .then(thoughts => {
+      dispatch(receiveUserThoughts(thoughts))})
     .catch(err => console.log(err))
-);
+};
 
 export const logThought = data => dispatch => (
   writeThought(data)

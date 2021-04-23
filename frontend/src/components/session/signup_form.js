@@ -17,6 +17,10 @@ class SignupForm extends React.Component {
         this.handleHoverExit = this.handleHoverExit.bind(this);
     }
 
+    componentDidMount() {
+        document.getElementById('session-signup-email').focus();
+    }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.signedIn === true) {
             this.props.history.push('/login');
@@ -43,7 +47,6 @@ class SignupForm extends React.Component {
     }
 
     handleHoverEnter(e) {
-        console.log(e.target.innerText);
         if(!e.target.innerText.includes(";")) {
             e.target.innerText += ";";
         }
@@ -64,6 +67,7 @@ class SignupForm extends React.Component {
             </ul>
         );
     }
+
     render() {
         return (
         <div className="session-form-container">
@@ -83,6 +87,7 @@ class SignupForm extends React.Component {
                             onChange={this.update('email')}
                             placeholder="Email"
                             name="email"
+                            id="session-signup-email"
                             className="session-form-input"
                         />
                       <p className="session-form-input-label">"</p>

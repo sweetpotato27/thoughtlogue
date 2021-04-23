@@ -28,12 +28,14 @@ class LoginForm extends React.Component {
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 if(this.state.name !== "" && this.state.password !== "") {
-                    console.log("enter")
                     document.getElementById("session-submit").click();
                 }
             }
         });
+        document.getElementById('session-login-name').focus();
     }
+
+    /* I am thinking of adding a html generator here.  to keep the render section dry */
 
     // Handle field updates (called in the render method) 
     update(field) {
@@ -56,7 +58,6 @@ class LoginForm extends React.Component {
     }
 
     handleHoverEnter(e) {
-        console.log(e.target.innerText);
         if(!e.target.innerText.includes(";")) {
             e.target.innerText += ";";
         }
@@ -98,6 +99,7 @@ class LoginForm extends React.Component {
                             onChange={this.update('name')}
                             placeholder="Name"
                             name="name"
+                            id="session-login-name"
                             className="session-form-input"
                         />
                       <p className="session-form-input-label">"</p>
@@ -129,7 +131,7 @@ class LoginForm extends React.Component {
                         onMouseEnter={this.handleHoverEnter}
                         onMouseLeave={this.handleHoverExit}
                         className="session-submit-span"
-                        >.signup(<span id="session-submit-name"></span>)
+                        >.login(<span id="session-submit-name"></span>)
                     </span>
                 </div>
                 {this.renderErrors()}

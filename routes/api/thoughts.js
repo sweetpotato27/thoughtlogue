@@ -18,7 +18,12 @@ router.get('/', (req, res) => {
 
 router.get('/user/:user_id', (req, res) => {
     Thought.find({ user: req.params.user_id })
-        .then(thoughts => res.json(thoughts))
+        .populate({
+            path: 'user', select: 'name'
+        })
+        .sort({ date: -1 })
+        .then(thoughts => {
+            res.json(thoughts);})
         .catch(err =>
             res.status(404).json({ nothoughtsfound: 'No thoughts found from that user' })
         );
