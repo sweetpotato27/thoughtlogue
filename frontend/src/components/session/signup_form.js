@@ -113,7 +113,7 @@ class SignupForm extends React.Component {
                       <div className="spacer"></div>
                       <p className="session-form-input-label">"</p>
                       <label htmlFor="password" className="visuallyhidden">Password: </label>
-                        <input type="text"
+                        <input type="password"
                             value={this.state.password}
                             onChange={this.update('password')}
                             placeholder="Password"
