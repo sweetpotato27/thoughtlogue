@@ -19,7 +19,7 @@ class ThoughtBox extends React.Component {
     return (
         <div className="indent">
             <p>{"{"}</p>
-            <p onClick={this.handleUserClick} className="indent">name: "{this.props.user.name}",</p>
+            <p onClick={this.handleUserClick} className="indent clickable thought-name">name: "{this.props.user.name}",</p>
             <p className="indent">text: "{this.props.text}"</p>
             <p>{"}"}{this.props.thoughtsLength - 1 === this.props.index ? "" : ","}</p>
         </div>

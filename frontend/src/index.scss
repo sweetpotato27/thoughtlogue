@@ -1,5 +1,6 @@
 @import '../public/styles/forms.scss';
 @import '../public/styles/nav.scss';
+@import '../public/styles/thoughts.scss';
 
 #root {
   width: 100vw;
@@ -17,6 +18,10 @@
 
 .spacer {
   width: 0.5em;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .movement {
