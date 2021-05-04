@@ -8,8 +8,14 @@ class Profile extends React.Component {
         super(props);
 
         this.state = {
-            thoughts: []
+            thoughts: [],
+            font: "",
+            background: ""
         }
+
+        this.handleColorClick = this.handleColorClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.update = this.update.bind(this);
     }
     
     UNSAFE_componentWillMount() {
@@ -19,17 +25,49 @@ class Profile extends React.Component {
 
     UNSAFE_componentWillReceiveProps(newState) {
         this.setState({ thoughts: newState.thoughts });
-    }   
+    } 
     
+    update(field) {
+        return e => this.setState({
+            [field]: e.currentTarget.value
+        });
+    }
+
+    handleColorClick(e) {
+      let collapsed = document.getElementById('collapsed-color');
+      let open = document.getElementById('open-color');
+      if (!collapsed.classList.contains('visuallyhidden')) {
+        collapsed.classList.add('visuallyhidden');
+      }
+      if (collapsed.classList.contains('visuallyhidden')) {
+        open.classList.remove('visuallyhidden');
+      }
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(e);
+      let data = {
+          userId: this.props.currentUser.id,
+          font: this.state.font,
+          background: this.state.background
+      }
+      this.props.updateUser(data);
+    }
+   
     render() {
-        if (this.state.thoughts.length === 0) {
-          return (<div>This user has no thoughts</div>)
-        } else {
-          return (
-            <div>
-              <p>{"{"}</p>
-              <p className="indent">{this.props.currentUser.name}'s thoughts:</p>
-              <div className="indent">
+      let allThoughts;
+      const mystyle = {
+        color: this.props.currentUser.font,
+        backgroundColor: this.props.currentUser.background
+      };
+
+      if (this.state.thoughts.length === 0) {
+        allThoughts = (<div className="indent">
+                undefined,
+              </div>);
+      } else {
+        allThoughts = (<div className="indent">
                 {this.state.thoughts.map((thought, idx) => (
                   <ThoughtBox key={thought._id} 
                               user={this.props.currentUser} 
@@ -37,12 +75,35 @@ class Profile extends React.Component {
                               thoughtsLength={this.state.thoughts.length} 
                               index={idx}/>
                   ))}
-              </div>
-              <p>{"}"}</p>
-            </div>
-          );
-        }
+              </div>)
       }
+
+      return (
+
+        <div style={mystyle}>
+          <p>{"{"}</p>
+          <p className="indent">{this.props.currentUser.name}'s colors: <span id="collapsed-color" className="clickable" onClick={this.handleColorClick}>{"{ ... },"}</span></p>
+          <div id="open-color" className="indent visuallyhidden">
+            <p>{"{"}</p>
+                <form onSubmit={this.handleSubmit}>
+                  <p className="indent">
+                    <label htmlFor="font" >font: </label>
+                    <input type="text" name="font" onChange={this.update('font')}></input>
+                  </p>
+                  <p className="indent">
+                    <label htmlFor="background" >background: </label>
+                    <input type="text" name="background" onChange={this.update('background')}></input>
+                  </p>
+                  <input type="submit"></input>
+                </form>
+            <p>{"},"}</p>
+          </div>
+          <p className="indent">{this.props.currentUser.name}'s thoughts:</p>
+            {allThoughts}
+          <p>{"}"}</p>
+        </div>
+      );
+    }
 }
 
 export default Profile;

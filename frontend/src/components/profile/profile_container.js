@@ -2,6 +2,7 @@
 
 import { connect } from 'react-redux';
 import { fetchUserThoughts } from '../../actions/thought_actions';
+import { updateUser } from '../../actions/profile_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state) => {
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUserThoughts: id => dispatch(fetchUserThoughts(id))
+    fetchUserThoughts: id => dispatch(fetchUserThoughts(id)),
+    updateUser: data => dispatch(updateUser(data))
   };
 };
 

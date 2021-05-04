@@ -14,8 +14,25 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     res.json({
         id: req.user.id,
         name: req.user.name,
-        email: req.user.email
+        email: req.user.email,
     });
+})
+
+/* update user */
+router.route('/').put((req, res) => {
+    let myquery = { _id: req.body.userId };
+    let valuesToUpdate = { $set: {font: req.body.font, background: req.body.background}};
+    User.updateOne(myquery, valuesToUpdate, (err, res) => {
+        if (err) throw err;
+        console.log("document updated");
+    })
+    res.send('Got a PUT request at /users/');
+    // User.findById(req.body.userId)
+    //     .then(user => {
+    //         console.log(user);
+    //         user.updateOne({background: req.body.background})
+    //             .then(user.save())
+    //     })
 })
 
 // register
@@ -84,7 +101,12 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { id: user.id, name: user.name };
+                        const payload = { 
+                            id: user.id, 
+                            name: user.name,
+                            background: user.background,
+                            font: user.font 
+                        };
 
                         jwt.sign(
                             payload,

@@ -14,6 +14,12 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    background: {
+        type: String
+    },
+    font: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now

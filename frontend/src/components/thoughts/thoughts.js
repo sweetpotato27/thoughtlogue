@@ -14,7 +14,7 @@ class Thought extends React.Component {
       thoughts: []
     }
   }
-
+ 
   UNSAFE_componentWillMount() {
     let lastFetch = parseInt(window.localStorage.getItem("lastFetch"));
     if (Math.floor((Date.now() - lastFetch) / 1000) > 300) {
