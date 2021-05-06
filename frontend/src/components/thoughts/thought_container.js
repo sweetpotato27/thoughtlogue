@@ -2,17 +2,20 @@
 
 import { connect } from 'react-redux';
 import { fetchThoughts } from '../../actions/thought_actions';
+import { fetchUsers } from '../../actions/user_actions';
 import Thoughts from './thoughts';
 
 const mapStateToProps = (state) => {
   return {
-    thoughts: Object.values(state.thoughts.all)
+    thoughts: Object.values(state.entities.thoughts.all),
+    users: Object.values(state.entities.users.all)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchThoughts: () => dispatch(fetchThoughts())
+    fetchThoughts: () => dispatch(fetchThoughts()),
+    fetchUsers: () => dispatch(fetchUsers())
   };
 };
 

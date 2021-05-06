@@ -20,11 +20,16 @@ class Profile extends React.Component {
     
     UNSAFE_componentWillMount() {
       /* should check localStorage before this fetch */
-        this.props.fetchUserThoughts(this.props.currentUser.id);
+        this.props.fetchUser(this.props.currentUser.id)
+        .then(this.props.fetchUserThoughts(this.props.currentUser.id));
     }
 
     UNSAFE_componentWillReceiveProps(newState) {
-        this.setState({ thoughts: newState.thoughts });
+        this.setState({ 
+          thoughts: newState.thoughts,
+          font: newState.user.font,
+          background: newState.user.background
+         });
     } 
     
     update(field) {
@@ -58,8 +63,8 @@ class Profile extends React.Component {
     render() {
       let allThoughts;
       const mystyle = {
-        color: this.props.currentUser.font,
-        backgroundColor: this.props.currentUser.background
+        color: this.state.font,
+        backgroundColor: this.state.background
       };
 
       if (this.state.thoughts.length === 0) {
@@ -70,6 +75,7 @@ class Profile extends React.Component {
         allThoughts = (<div className="indent">
                 {this.state.thoughts.map((thought, idx) => (
                   <ThoughtBox key={thought._id} 
+                              customStyle={mystyle}
                               user={this.props.currentUser} 
                               text={thought.text}
                               thoughtsLength={this.state.thoughts.length} 
@@ -79,31 +85,30 @@ class Profile extends React.Component {
       }
 
       return (
-
-        <div style={mystyle}>
+        <div>
           <p>{"{"}</p>
-          <p className="indent">{this.props.currentUser.name}'s colors: <span id="collapsed-color" className="clickable" onClick={this.handleColorClick}>{"{ ... },"}</span></p>
-          <div id="open-color" className="indent visuallyhidden">
-            <p>{"{"}</p>
-                <form onSubmit={this.handleSubmit}>
-                  <p className="indent">
-                    <label htmlFor="font" >font: </label>
-                    <input type="text" name="font" onChange={this.update('font')}></input>
-                  </p>
-                  <p className="indent">
-                    <label htmlFor="background" >background: </label>
-                    <input type="text" name="background" onChange={this.update('background')}></input>
-                  </p>
-                  <input type="submit"></input>
-                </form>
-            <p>{"},"}</p>
-          </div>
           <p className="indent">{this.props.currentUser.name}'s thoughts:</p>
             {allThoughts}
           <p>{"}"}</p>
         </div>
       );
     }
+    /* <p className="indent">{this.props.currentUser.name}'s colors: <span id="collapsed-color" className="clickable" onClick={this.handleColorClick}>{"{ ... },"}</span></p>
+              <div id="open-color" className="indent visuallyhidden">
+                <p>{"{"}</p>
+                    <form onSubmit={this.handleSubmit}>
+                      <p className="indent">
+                        <label htmlFor="font" >font: </label>
+                        <input type="text" name="font" onChange={this.update('font')}></input>
+                      </p>
+                      <p className="indent">
+                        <label htmlFor="background" >background: </label>
+                        <input type="text" name="background" onChange={this.update('background')}></input>
+                      </p>
+                      <input type="submit"></input>
+                    </form>
+                <p>{"},"}</p>
+              </div> */
 }
 
 export default Profile;

@@ -18,6 +18,22 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     });
 })
 
+/* get all users */
+router.get('/', (req, res) => {
+    User.find()
+        .then(users => res.json(users))
+        .catch(err => res.status(404).json({ nousersfound: 'No users found' }));
+});
+
+/* get a single user */
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err => 
+            res.status(404).json({ nouserfound: 'No user found with that ID' })
+        );
+});
+
 /* update user */
 router.route('/').put((req, res) => {
     let myquery = { _id: req.body.userId };

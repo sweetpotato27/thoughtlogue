@@ -11,7 +11,8 @@ class Thought extends React.Component {
     super(props);
 
     this.state = {
-      thoughts: []
+      thoughts: [],
+      users: []
     }
   }
  
@@ -30,13 +31,14 @@ class Thought extends React.Component {
         let storedThoughts = JSON.parse(window.localStorage.getItem("thoughts")).data;
         this.setState({ thoughts: storedThoughts });
       } else {
-        this.props.fetchThoughts().then(res => {
+        this.props.fetchUsers()
+        .then(this.props.fetchThoughts().then(res => {
           if (res !== undefined) {
             window.localStorage.setItem("lastFetch", Date.now().toString());
             window.localStorage.setItem("thoughts", JSON.stringify(res.thoughts));
           }
           return res;
-        });
+        }));
       }
     }
   }
